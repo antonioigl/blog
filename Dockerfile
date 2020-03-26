@@ -18,7 +18,7 @@
 #
 # Open browser :
 # http://localhost:8081
-# or (configure local files addla-coma-corner.local to /etc/hosts)
+# or (configure local files blog.local to /etc/hosts)
 # http://blog.local:8081
 #-----------------------------------------------------------------------
 
