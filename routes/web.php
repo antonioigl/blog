@@ -2,11 +2,11 @@
 
 Route::get('/', 'PagesController@home');
 
-Route::get('home', 'HomeController@index');
 
 // rutas de administración
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function (){
     Route::get('posts', 'PostsController@index')->name('admin.post.index');
+    Route::get('/', 'AdminController@index')->name('dashboard');
 });
 
 
