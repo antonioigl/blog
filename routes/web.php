@@ -1,20 +1,16 @@
 <?php
 
-use App\Post;
+Route::get('/', 'PagesController@home');
 
-Route::get('/', function () {
-    $posts = Post::latest('published_at')->get();
-    return view('welcome', compact('posts'));
+Route::get('home', 'HomeController@index');
+
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function (){
+    // rutas de administración
+    Route::get('posts', 'PostsController@index');
 });
 
-Route::get('posts', function () {
-    return Post::all();
-});
 
-Route::get('home', function () {
-    return view('admin.dashboard');
-})->middleware('auth');
-
+// Authentication Routes...
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
