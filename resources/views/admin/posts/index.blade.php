@@ -50,3 +50,26 @@
         </div>
     </div>
 @stop
+
+@push('styles')
+    <!-- DataTables -->
+    <link rel="stylesheet" href="{{asset('adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.css')}}">
+@endpush
+
+@push('scripts')
+    <!-- DataTables -->
+    <script src="{{asset('adminlte/plugins/datatables/jquery.dataTables.js')}}"></script>
+    <script src="{{asset('adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.js')}}"></script>
+    <script>
+        $(function () {
+            $('#posts-table').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+            });
+        });
+    </script>
+@endpush
