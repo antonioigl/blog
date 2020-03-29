@@ -5,7 +5,7 @@
             <p>{{ __('Inicio') }}</p>
         </a>
     </li>
-    <li class="nav-item has-treeview {{ request()->is('admin/posts') ? 'menu-open' : ''}}">
+    <li class="nav-item has-treeview {{ request()->is('admin/posts*') ? 'menu-open' : ''}}">
         <a href="#" class="nav-link {{ request()->is('admin/posts') ? 'active' : ''}}">
             <i class="nav-icon fas fa-bars"></i>
             <p>
@@ -15,13 +15,13 @@
         </a>
         <ul class="nav nav-treeview">
             <li class="nav-item">
-                <a href="{{ route('admin.post.index') }}" class="nav-link {{ request()->is('admin/posts') ? 'active' : ''}}">
+                <a href="{{ route('admin.posts.index') }}" class="nav-link {{ request()->is('admin/posts') ? 'active' : ''}}">
                     <i class="far fa-eye"></i>
                     <p>{{ __('Ver todos los posts') }}</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('admin.posts.create') }}" class="nav-link {{ request()->is('admin/posts/create') ? 'active' : ''}}">
                     <i class="far fa-edit"></i>
                     <p>{{ __('Crear un post') }}</p>
                 </a>
