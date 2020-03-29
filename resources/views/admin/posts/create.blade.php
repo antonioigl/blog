@@ -50,7 +50,7 @@
                         </div>
                         <div class="form-group">
                             <label for="category">{{ __('Categorías') }}</label>
-                            <select type="date" class="form-control" name="published_at" id="published_at">
+                            <select type="date" class="form-control" name="category" id="category">
                                 <option value="">{{ __('Selecciona una categoría') }}</option>
                                 @foreach($categories as $category)
                                     <option value="{{$category->id}}">{{$category->name}}</option>
@@ -58,8 +58,16 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="body">{{ __('Contenido de la publicación') }}</label>
-                            <textarea class="form-control" id="body" name="body" placeholder="{{ __('Ingresa el contenido completo de la publicación') }}"></textarea>
+                            <label for="tags">{{ __('Etiquetas') }}</label>
+                            <select class="form-group select2bs4" name="tags" id="tags" multiple="multiple" data-placeholder="{{ __('Selecciona una o más etiquetas') }}" style="width: 100%;">
+                                @foreach($tags as $tag)
+                                    <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="excerpt">{{ __('Extracto de la publicación') }}</label>
+                            <textarea class="form-control" id="excerpt" name="excerpt" placeholder="{{ __('Ingresa un extracto de la publicación') }}"></textarea>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-block">{{ __('Guardar publicación') }}</button>
@@ -72,3 +80,21 @@
     </form>
 @stop
 
+@push('styles')
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{asset('adminlte/plugins/select2/css/select2.min.css')}}">
+    <link rel="stylesheet" href="{{asset('adminlte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
+@endpush
+
+@push('scripts')
+    <!-- Ckeditor -->
+    <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+    <!-- Select2 -->
+    <script src="{{asset('adminlte/plugins/select2/js/select2.full.min.js')}}"></script>
+    <script>
+        $('#tags').select2({
+            theme: 'bootstrap4'
+        });
+        CKEDITOR.replace( 'body' );
+    </script>
+@endpush
