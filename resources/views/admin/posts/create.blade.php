@@ -18,7 +18,8 @@
 @stop
 
 @section('content')
-    <form action="">
+    <form method="post" action="{{route('admin.posts.store')}}">
+        {{csrf_field()}}
         <div class="row">
             <div class="col-md-8">
                 <div class="card card-primary">
@@ -59,7 +60,7 @@
                         </div>
                         <div class="form-group">
                             <label for="tags">{{ __('Etiquetas') }}</label>
-                            <select class="form-group select2bs4" name="tags" id="tags" multiple="multiple" data-placeholder="{{ __('Selecciona una o más etiquetas') }}" style="width: 100%;">
+                            <select class="form-group select2bs4" name="tags[]" id="tags" multiple="multiple" data-placeholder="{{ __('Selecciona una o más etiquetas') }}" style="width: 100%;">
                                 @foreach($tags as $tag)
                                     <option value="{{ $tag->id }}">{{ $tag->name }}</option>
                                 @endforeach
