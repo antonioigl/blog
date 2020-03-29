@@ -25,12 +25,14 @@
                 <div class="card card-primary">
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="title">{{ __('Título de la publicación') }}</label>
-                            <input type="text" class="form-control" id="title" name="title" placeholder="{{ __('Ingresa aquí el título de la publicación') }}">
+                            <label {{ $errors->has('title') ? 'class=text-red' : '' }} for="title">{{ __('Título de la publicación*') }}</label>
+                            <input type="text" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" value="{{old('title')}}" id="title" name="title" placeholder="{{ __('Ingresa aquí el título de la publicación') }}">
+                            {!! $errors->first('title', '<span class="error invalid-feedback">:message</span>') !!}
                         </div>
                         <div class="form-group">
-                            <label for="body">{{ __('Contenido de la publicación') }}</label>
-                            <textarea rows="10" class="form-control" id="body" name="body" placeholder="{{ __('Ingresa el contenido completo de la publicación') }}"></textarea>
+                            <label {{ $errors->has('body') ? 'class=text-red' : '' }} for="body">{{ __('Contenido de la publicación*') }}</label>
+                            <textarea rows="10" class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }}" id="body" name="body" placeholder="{{ __('Ingresa el contenido completo de la publicación') }}">{{old('body')}}</textarea>
+                            {!! $errors->first('body', '<span class="error invalid-feedback">:message</span>') !!}
                         </div>
                     </div>
                     <!-- /.card-body -->
@@ -45,30 +47,33 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                 </div>
-                                <input type="date" class="form-control" name="published_at" id="published_at">
+                                <input type="date" class="form-control" value="{{old('published_at')}}" name="published_at" id="published_at">
                             </div>
                             <!-- /.input group -->
                         </div>
                         <div class="form-group">
-                            <label for="category">{{ __('Categorías') }}</label>
-                            <select type="date" class="form-control" name="category" id="category">
+                            <label {{ $errors->has('category') ? 'class=text-red' : '' }} for="category">{{ __('Categorías*') }}</label>
+                            <select class="form-control {{ $errors->has('category') ? 'is-invalid' : '' }}" name="category" id="category">
                                 <option value="">{{ __('Selecciona una categoría') }}</option>
                                 @foreach($categories as $category)
-                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                    <option value="{{$category->id}}" {{ old('category') == $category->id ? 'selected' : '' }}>{{$category->name}}</option>
                                 @endforeach
                             </select>
+                            {!! $errors->first('category', '<span class="error invalid-feedback">:message</span>') !!}
                         </div>
                         <div class="form-group">
-                            <label for="tags">{{ __('Etiquetas') }}</label>
-                            <select class="form-group select2bs4" name="tags[]" id="tags" multiple="multiple" data-placeholder="{{ __('Selecciona una o más etiquetas') }}" style="width: 100%;">
+                            <label {{ $errors->has('tags') ? 'class=text-red' : '' }} for="tags">{{ __('Etiquetas*') }}</label>
+                            <select class="form-control select2bs4 {{ $errors->has('tags') ? 'is-invalid' : '' }}" name="tags[]" id="tags" multiple="multiple" data-placeholder="{{ __('Selecciona una o más etiquetas') }}" style="width: 100%;">
                                 @foreach($tags as $tag)
-                                    <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                    <option {{ collect(old('tags'))->contains($tag->id) ? 'selected' : '' }} value="{{ $tag->id }}">{{ $tag->name }}</option>
                                 @endforeach
                             </select>
+                            {!! $errors->first('tags', '<span class="error invalid-feedback">:message</span>') !!}
                         </div>
                         <div class="form-group">
-                            <label for="excerpt">{{ __('Extracto de la publicación') }}</label>
-                            <textarea class="form-control" id="excerpt" name="excerpt" placeholder="{{ __('Ingresa un extracto de la publicación') }}"></textarea>
+                            <label {{ $errors->has('excerpt') ? 'class=text-red' : '' }} for="excerpt">{{ __('Extracto de la publicación*') }}</label>
+                            <textarea class="form-control {{ $errors->has('excerpt') ? 'is-invalid' : '' }}" id="excerpt" name="excerpt" placeholder="{{ __('Ingresa un extracto de la publicación') }}">{{ old('excerpt') }}</textarea>
+                            {!! $errors->first('excerpt', '<span class="error invalid-feedback">:message</span>') !!}
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-block">{{ __('Guardar publicación') }}</button>
