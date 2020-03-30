@@ -12,6 +12,7 @@ use function back;
 use function compact;
 use function dd;
 use function is_null;
+use function str_slug;
 use function view;
 
 class PostsController extends Controller
@@ -44,7 +45,7 @@ class PostsController extends Controller
         $post = new Post;
         $post->title = $request->title;
         //$post->title = $request->get('title');
-        $post->title = $request->title;
+        $post->url = str_slug($request->title);
         $post->body = $request->body;
         $post->excerpt = $request->excerpt;
         //$post->published_at = is_null($request->published_at) ? Carbon::parse($request->published_at) : null;

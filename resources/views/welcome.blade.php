@@ -21,7 +21,7 @@
                     <p>{{ $post->excerpt }}</p>
                     <footer class="container-flex space-between">
                         <div class="read-more">
-                            <a href="{{route('posts.show', $post->id)}}" class="text-uppercase c-green">{{ __('Leer más') }}</a>
+                            <a href="{{route('posts.show', $post->url)}}" class="text-uppercase c-green">{{ __('Leer más') }}</a>
                         </div>
                         <div class="tags container-flex">
                             @foreach($post->tags as $tag)
