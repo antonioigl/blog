@@ -12,6 +12,7 @@ use function back;
 use function compact;
 use function dd;
 use function is_null;
+use function redirect;
 use function str_slug;
 use function view;
 
@@ -23,14 +24,33 @@ class PostsController extends Controller
         return view('admin.posts.index', compact('posts'));
     }
 
-    public function create()
+    //public function create()
+    //{
+    //    $categories = Category::all();
+    //    $tags = Tag::all();
+    //    return view('admin.posts.create', compact('categories', 'tags'));
+    //}
+
+    public function store(Request $request)
+    {
+        $this->validate($request, ['title' => 'required']);
+
+        $post = Post::create([
+            'title' => $request->title,
+            'url' => str_slug($request->title),
+        ]);
+
+        return redirect()->route('admin.posts.edit', $post);
+    }
+
+    public function edit(Post $post)
     {
         $categories = Category::all();
         $tags = Tag::all();
-        return view('admin.posts.create', compact('categories', 'tags'));
+        return view('admin.posts.edit', compact('post', 'categories', 'tags'));
     }
 
-    public function store(Request $request)
+    public function update(Request $request, Post $post)
     {
         //Validation
         $this->validate($request, [
@@ -42,7 +62,7 @@ class PostsController extends Controller
         ]);
 
         //$post = Post::created($request);
-        $post = new Post;
+        //$post = new Post;
         $post->title = $request->title;
         //$post->title = $request->get('title');
         $post->url = str_slug($request->title);
@@ -54,9 +74,9 @@ class PostsController extends Controller
 
         $post->save();
 
-        $post->tags()->attach($request->tags);
+        $post->tags()->sync($request->tags);
 
-        return back()->with('flash', 'Tu publicación ha sido creada');
+        return back()->with('flash', 'Tu publicación ha sido guardada');
 
 
 

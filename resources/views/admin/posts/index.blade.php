@@ -16,12 +16,13 @@
     </div><!-- /.container-fluid -->
 @stop
 @section('content')
-    <div class="card">
+    <div class="card card-primary">
         <div class="card-header">
             <h3 class="card-title">{{ __('Listado de publicaciones') }}</h3>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i> {{ __('Crear publicación') }}</button>
             <table id="posts-table" class="table table-bordered table-striped">
             <thead>
                 <tr>
@@ -62,14 +63,7 @@
     <script src="{{asset('adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.js')}}"></script>
     <script>
         $(function () {
-            $('#posts-table').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-            });
+            $('#posts-table').DataTable();
         });
     </script>
 @endpush
