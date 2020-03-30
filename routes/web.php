@@ -1,7 +1,7 @@
 <?php
 
 Route::get('/', 'PagesController@home')->name('home');
-Route::get('posts/{post}', 'PostsController@show')->name('posts.show');
+Route::get('blog/{post}', 'PostsController@show')->name('posts.show');
 
 
 // Admin Routes...
