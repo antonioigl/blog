@@ -112,12 +112,21 @@
 
         CKEDITOR.replace( 'body' );
 
-        new Dropzone('.dropzone', {
-            'url': '/admin/posts/{{$post->url}}/photos',
+        var myDropzone = new Dropzone('.dropzone', {
+            url: '/admin/posts/{{$post->url}}/photos',
+            paramName: 'photo',
+            acceptedFiles: 'image/*',
+            maxFilesize: 2,
+            // maxFiles: 2,
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}',
             },
             'dictDefaultMessage': '{{ __('Arrastra las fotos aquí para subirlas') }}'
+        });
+
+        myDropzone.on('error', function (file, res) {
+            var msg = res['errors'].photo[0];
+            $('.dz-error-message:last > span').text(msg);
         });
 
         Dropzone.autoDiscover = false;
