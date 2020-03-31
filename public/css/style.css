@@ -268,20 +268,37 @@ a.btn-bar{
           
       }
 
-.buttons-social-media-share {
+.buttons-social-media-share{
 	margin-bottom: 20px;
 }
 
-.buttons-social-media-share .share-buttons {
+.buttons-social-media-share .share-buttons{
 	margin: 0;
 	padding: 0;
 }
 
 .buttons-social-media-share .share-buttons li{
-
 	list-style-type: none;
 	float: left;
 	margin-right: 10px;
-
 }
 
+.overlay{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	color: white;
+	font-size: 30px;
+	background-color: rgba(0,0,0,.7);
+}
+
+.gallery-photos{
+	overflow: hidden;
+}
+
+.carousel-inner .item img{
+	width: 100%;
+}
