@@ -12,7 +12,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         {{--                        <label {{ $errors->has('title') ? 'class=text-red' : '' }} for="title">{{ __('Título de la publicación*') }}</label>--}}
-                        <input type="text" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" value="{{old('title')}}" id="title" name="title" placeholder="{{ __('Ingresa aquí el título de la publicación') }}">
+                        <input type="text" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" value="{{old('title')}}" id="title" name="title" placeholder="{{ __('Ingresa aquí el título de la publicación') }}" required>
                         {!! $errors->first('title', '<span class="error invalid-feedback">:message</span>') !!}
                     </div>
                 </div>

@@ -77,6 +77,9 @@
                             {!! $errors->first('excerpt', '<span class="error invalid-feedback">:message</span>') !!}
                         </div>
                         <div class="form-group">
+                            <div class="dropzone"></div>
+                        </div>
+                        <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-block">{{ __('Guardar publicación') }}</button>
                         </div>
                     </div>
@@ -88,12 +91,16 @@
 @stop
 
 @push('styles')
+    <!-- Dropzone -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.0/dropzone.css">
     <!-- Select2 -->
     <link rel="stylesheet" href="{{asset('adminlte/plugins/select2/css/select2.min.css')}}">
     <link rel="stylesheet" href="{{asset('adminlte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
 @endpush
 
 @push('scripts')
+    <!-- Dropzone -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.0/min/dropzone.min.js"></script>
     <!-- Ckeditor -->
     <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
     <!-- Select2 -->
@@ -102,6 +109,18 @@
         $('#tags').select2({
             theme: 'bootstrap4'
         });
+
         CKEDITOR.replace( 'body' );
+
+        new Dropzone('.dropzone', {
+            'url': '/admin/posts/{{$post->url}}/photos',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+            },
+            'dictDefaultMessage': '{{ __('Arrastra las fotos aquí para subirlas') }}'
+        });
+
+        Dropzone.autoDiscover = false;
+
     </script>
 @endpush
