@@ -8,12 +8,8 @@ use App\Tag;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use function back;
 use function compact;
-use function dd;
-use function is_null;
 use function redirect;
-use function str_slug;
 use function view;
 
 class PostsController extends Controller
@@ -67,11 +63,23 @@ class PostsController extends Controller
         $post->excerpt = $request->excerpt;
         //$post->published_at = is_null($request->published_at) ? Carbon::parse($request->published_at) : null;
         $post->published_at = $request->published_at ? Carbon::parse($request->published_at) : null;
-        $post->category_id = $request->category;
+
+        $post->category_id = Category::find($cat = $request->category)
+                                ? $cat
+                                : Category::create(['name' => $cat])->id;
 
         $post->save();
 
-        $post->tags()->sync($request->tags);
+        $tags = [];
+
+        foreach ($request->tags as $tag) {
+            $tags[] = Tag::find($tag)
+                        ? $tag
+                        : Tag::create(['name' => $tag])->id;
+
+        }
+
+        $post->tags()->sync($tags);
 
         return redirect()->route('admin.posts.edit', $post)->with('flash', __('Tu publicación ha sido guardada'));
 

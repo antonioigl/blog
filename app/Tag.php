@@ -7,6 +7,8 @@ use function str_slug;
 
 class Tag extends Model
 {
+    protected $guarded = [];
+
     public function getRouteKeyName()
     {
         return 'url';

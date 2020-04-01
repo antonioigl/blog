@@ -82,7 +82,7 @@
                             </div>
                             <div class="form-group">
                                 <label {{ $errors->has('category') ? 'class=text-red' : '' }} for="category">{{ __('Categorías*') }}</label>
-                                <select class="form-control {{ $errors->has('category') ? 'is-invalid' : '' }}" name="category" id="category">
+                                <select class="form-control select2bs4 {{ $errors->has('category') ? 'is-invalid' : '' }}" name="category" id="category">
                                     <option value="">{{ __('Selecciona una categoría') }}</option>
                                     @foreach($categories as $category)
                                         <option value="{{$category->id}}" {{ old('category', $post->category_id) == $category->id ? 'selected' : '' }}>{{$category->name}}</option>
@@ -135,8 +135,9 @@
     <!-- Select2 -->
     <script src="{{asset('adminlte/plugins/select2/js/select2.full.min.js')}}"></script>
     <script>
-        $('#tags').select2({
-            theme: 'bootstrap4'
+        $('.select2bs4').select2({
+            theme: 'bootstrap4',
+            tags: true,
         });
 
         CKEDITOR.replace( 'body' );
