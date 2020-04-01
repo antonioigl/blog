@@ -67,6 +67,7 @@ class PostsController extends Controller
         //$post->title = $request->get('title');
         $post->url = str_slug($request->title);
         $post->body = $request->body;
+        $post->iframe = $request->iframe;
         $post->excerpt = $request->excerpt;
         //$post->published_at = is_null($request->published_at) ? Carbon::parse($request->published_at) : null;
         $post->published_at = $request->published_at ? Carbon::parse($request->published_at) : null;

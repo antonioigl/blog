@@ -49,7 +49,7 @@ class PostsTableSeeder extends Seeder
 
         $post = new Post;
         $post->title = 'Mi segundo post';
-        $post->url = str_slug('Mi segundo post');
+        $post->url = str_slug('Mi tercer post');
         $post->excerpt = 'Extracto de mi tercer post';
         $post->body = '<p>Contenido de mi tercer post</p>';
         $post->published_at = Carbon::now()->subDays(2);

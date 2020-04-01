@@ -2,7 +2,7 @@
 	figure.logo{
 		margin: 1em 0;
 	}
-  .post .content-post{
+	.post .content-post{
 	padding: 25px;
 	}
 	.content-post{
@@ -15,7 +15,7 @@
 		right: 0;
 		top: 0;
 	}
-  .post h1, .post h2{
+	.post h1, .post h2{
 	font-size: 28px;
 	line-height: 1.2;
 	color: #000000;
@@ -30,7 +30,7 @@
 	.tags{
 		margin-top: 15px;
 	}
-	
+
 	.video iframe{
 		height: 247px;
 	}
@@ -66,12 +66,12 @@
         
     }
 
-    .custom-menu-3 {
-              text-align: left;
-          }
+	.custom-menu-3 {
+		text-align: left;
+	}
       
-          .custom-toggle {
-              display: block;
-          }
+	.custom-toggle {
+	  display: block;
+	}
 	
 }

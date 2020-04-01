@@ -58,6 +58,11 @@
                                 <textarea rows="10" class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }}" id="body" name="body" placeholder="{{ __('Ingresa el contenido completo de la publicación') }}">{{old('body', $post->body)}}</textarea>
                                 {!! $errors->first('body', '<span class="error invalid-feedback">:message</span>') !!}
                             </div>
+                            <div class="form-group">
+                                <label {{ $errors->has('iframe') ? 'class=text-red' : '' }} for="iframe">{{ __('Contenido embebido') }}</label>
+                                <textarea rows="2" class="form-control {{ $errors->has('iframe') ? 'is-invalid' : '' }}" id="iframe" name="iframe" placeholder="{{ __('Ingresa el contenido embebido de audio o vídeo') }}">{{old('iframe', $post->iframe)}}</textarea>
+                                {!! $errors->first('iframe', '<span class="error invalid-feedback">:message</span>') !!}
+                            </div>
                         </div>
                         <!-- /.card-body -->
                     </div>
