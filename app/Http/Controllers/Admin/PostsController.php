@@ -6,10 +6,8 @@ use App\Category;
 use App\Http\Requests\StorePostRequest;
 use App\Post;
 use App\Tag;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use function collect;
 use function compact;
 use function redirect;
 use function view;
@@ -48,7 +46,6 @@ class PostsController extends Controller
     public function update(StorePostRequest $request, Post $post)
     {
         $post->update($request->all());
-
 
         $post->syncTags($request->tags);
 
