@@ -81,14 +81,14 @@
                                 <!-- /.input group -->
                             </div>
                             <div class="form-group">
-                                <label {{ $errors->has('category') ? 'class=text-red' : '' }} for="category">{{ __('Categorías*') }}</label>
-                                <select class="form-control select2bs4 {{ $errors->has('category') ? 'is-invalid' : '' }}" name="category" id="category">
+                                <label {{ $errors->has('category_id') ? 'class=text-red' : '' }} for="category_id">{{ __('Categorías*') }}</label>
+                                <select class="form-control select2bs4 {{ $errors->has('category_id') ? 'is-invalid' : '' }}" name="category_id" id="category_id">
                                     <option value="">{{ __('Selecciona una categoría') }}</option>
                                     @foreach($categories as $category)
-                                        <option value="{{$category->id}}" {{ old('category', $post->category_id) == $category->id ? 'selected' : '' }}>{{$category->name}}</option>
+                                        <option value="{{$category->id}}" {{ old('category_id', $post->category_id) == $category->id ? 'selected' : '' }}>{{$category->name}}</option>
                                     @endforeach
                                 </select>
-                                {!! $errors->first('category', '<span class="error invalid-feedback">:message</span>') !!}
+                                {!! $errors->first('category_id', '<span class="error invalid-feedback">:message</span>') !!}
                             </div>
                             <div class="form-group">
                                 <label {{ $errors->has('tags') ? 'class=text-red' : '' }} for="tags">{{ __('Etiquetas*') }}</label>

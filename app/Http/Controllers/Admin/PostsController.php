@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Category;
+use App\Http\Requests\StorePostRequest;
 use App\Post;
 use App\Tag;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use function collect;
 use function compact;
 use function redirect;
 use function view;
@@ -43,47 +45,13 @@ class PostsController extends Controller
         return view('admin.posts.edit', compact('post', 'categories', 'tags'));
     }
 
-    public function update(Request $request, Post $post)
+    public function update(StorePostRequest $request, Post $post)
     {
-        //Validation
-        $this->validate($request, [
-            'title' => 'required',
-            'body' => 'required',
-            'tags' => 'required',
-            'category' => 'required',
-            'excerpt' => 'required',
-        ]);
+        $post->update($request->all());
 
-        //$post = Post::created($request);
-        //$post = new Post;
-        $post->title = $request->title;
-        //$post->title = $request->get('title');
-        $post->body = $request->body;
-        $post->iframe = $request->iframe;
-        $post->excerpt = $request->excerpt;
-        //$post->published_at = is_null($request->published_at) ? Carbon::parse($request->published_at) : null;
-        $post->published_at = $request->published_at ? Carbon::parse($request->published_at) : null;
 
-        $post->category_id = Category::find($cat = $request->category)
-                                ? $cat
-                                : Category::create(['name' => $cat])->id;
-
-        $post->save();
-
-        $tags = [];
-
-        foreach ($request->tags as $tag) {
-            $tags[] = Tag::find($tag)
-                        ? $tag
-                        : Tag::create(['name' => $tag])->id;
-
-        }
-
-        $post->tags()->sync($tags);
+        $post->syncTags($request->tags);
 
         return redirect()->route('admin.posts.edit', $post)->with('flash', __('Tu publicación ha sido guardada'));
-
-
-
     }
 }
