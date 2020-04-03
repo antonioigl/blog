@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use function compact;
 use function redirect;
+use function str_slug;
 use function view;
 
 class PostsController extends Controller
