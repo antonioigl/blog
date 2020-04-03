@@ -1,5 +1,5 @@
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <form method="post" action="{{route('admin.posts.store')}}">
+    <form method="post" action="{{route('admin.posts.store', '#create')}}">
         {{csrf_field()}}
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -12,7 +12,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         {{--                        <label {{ $errors->has('title') ? 'class=text-red' : '' }} for="title">{{ __('Título de la publicación*') }}</label>--}}
-                        <input type="text" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" value="{{old('title')}}" id="title" name="title" placeholder="{{ __('Ingresa aquí el título de la publicación') }}" required>
+                        <input type="text" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" value="{{old('title')}}" id="title" name="title" placeholder="{{ __('Ingresa aquí el título de la publicación') }}" autofocus required>
                         {!! $errors->first('title', '<span class="error invalid-feedback">:message</span>') !!}
                     </div>
                 </div>
@@ -24,3 +24,20 @@
         </div>
     </form>
 </div>
+
+@push('scripts')
+    <script>
+        if ( window.location.hash === '#create'){
+            $('#exampleModal').modal('show');
+        }
+
+        $('#exampleModal').on('hide.bs.modal', function () {
+            window.location.hash = '#';
+        });
+
+        $('#exampleModal').on('shown.bs.modal', function () {
+            $('#title').focus();
+            window.location.hash = '#create';
+        });
+    </script>
+@endpush
