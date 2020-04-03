@@ -9,7 +9,7 @@ class TagsController extends Controller
 {
     public function show(Tag $tag)
     {
-        return view('welcome', [
+        return view('pages.home', [
             'title' => __("Publicaciones de la categoría '{$tag->name}'"),
             'posts' => $tag->posts()->paginate(5),
         ]);
