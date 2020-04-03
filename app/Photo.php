@@ -5,7 +5,6 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use function count;
-use function dd;
 use function explode;
 
 class Photo extends Model

@@ -51,4 +51,11 @@ class PostsController extends Controller
 
         return redirect()->route('admin.posts.edit', $post)->with('flash', __('Tu publicación ha sido guardada'));
     }
+
+    public function destroy(Post $post)
+    {
+        $post->delete();
+
+        return redirect()->route('admin.posts.index')->with('flash', __('La publicación ha sido eliminada'));
+    }
 }
