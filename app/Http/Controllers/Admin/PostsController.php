@@ -8,9 +8,9 @@ use App\Post;
 use App\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use function auth;
 use function compact;
 use function redirect;
-use function str_slug;
 use function view;
 
 class PostsController extends Controller
@@ -32,7 +32,12 @@ class PostsController extends Controller
     {
         $this->validate($request, ['title' => 'required|min:3']);
 
-        $post = Post::create($request->only('title'));
+        //$post = Post::create($request->only('title'));
+
+        $post = Post::create([
+            'title' => $request->title,
+            'user_id' => auth()->id(),
+        ]);
 
         return redirect()->route('admin.posts.edit', $post);
     }
