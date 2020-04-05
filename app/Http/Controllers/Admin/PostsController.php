@@ -8,7 +8,6 @@ use App\Post;
 use App\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use function auth;
 use function compact;
 use function redirect;
 use function view;
@@ -17,7 +16,8 @@ class PostsController extends Controller
 {
     public function index()
     {
-        $posts = auth()->user()->posts;
+        $posts = Post::allowed()->get();
+
         return view('admin.posts.index', compact('posts'));
     }
 
