@@ -4,6 +4,7 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use function auth;
 use function is_null;
 use function str_slug;
 use function today;
@@ -74,6 +75,7 @@ class Post extends Model
 
     public static function create(array $attibutes = [])
     {
+        $attibutes['user_id'] = auth()->user()->id;
         $post = static::query()->create($attibutes);
         $post->generarUrl();
        

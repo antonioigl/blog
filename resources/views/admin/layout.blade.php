@@ -203,8 +203,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <aside class="control-sidebar control-sidebar-dark">
                 <!-- Control sidebar content goes here -->
                 <div class="p-3">
-                    <h5>Title</h5>
-                    <p>Sidebar content</p>
+                    <h5>{{ auth()->user()->name  }}</h5>
+                    <form method="POST" action="{{ route('logout') }}">
+                        {{ csrf_field() }}
+                        <p><button class="btn btn-default btn-flat btn-block">{{__('Cerrar sesión')}}</button></p>
+                    </form>
                 </div>
             </aside>
             <!-- /.control-sidebar -->
