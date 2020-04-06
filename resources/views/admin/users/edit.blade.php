@@ -54,11 +54,12 @@
                     <form method="POST" action="{{ route('admin.users.roles.update', $user) }}">
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
-                        @foreach($roles as $id => $name)
+                        @foreach($roles as $role)
                             <div class="checkbox">
-                                <label for="roles-{{$id}}">
-                                    <input name="roles[]" id="roles-{{$id}}" type="checkbox" value="{{ $id }}" {{ $user->roles->contains($id) ? 'checked' : ''}}>
-                                    {{ $name }}
+                                <label for="roles-{{$role->id}}">
+                                    <input name="roles[]" id="roles-{{$role->id}}" type="checkbox" value="{{ $role->id }}" {{ $user->roles->contains($role->id) ? 'checked' : ''}}>
+                                    {{ $role->name }} <br>
+                                    <small class="text-muted">{{ $role->permissions()->pluck('name')->implode(', ') }}</small>
                                 </label>
                             </div>
                         @endforeach
