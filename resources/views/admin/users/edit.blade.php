@@ -25,11 +25,20 @@
                         {{ method_field('PUT') }}
                         <div class="form-group">
                             <label for="name">{{ __('Nombre:')  }}</label>
-                            <input name="name" value="{{old('name', $user->name)}}" type="text"class="form-control">
+                            <input name="name" id="name" value="{{old('name', $user->name)}}" type="text"class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="email">{{ __('Email:')  }}</label>
-                            <input name="email" value="{{old('email', $user->email)}}" type="email" class="form-control">
+                            <input name="email" id="email" value="{{old('email', $user->email)}}" type="email" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">{{ __('Contraseña:')  }}</label>
+                            <input name="password" id="password" type="password" class="form-control" placeholder="Contraseña">
+                            <span class="help-block">{{ __('Dejar en blanco para no cambiar la contraseña') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="password_confirmation">{{ __('Confirma la contraseña:')  }}</label>
+                            <input name="password_confirmation" id="password_confirmation" type="password" class="form-control" placeholder="Repite la contraseña">
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">{{ __('Actualizar usuario') }}</button>
                     </form>
