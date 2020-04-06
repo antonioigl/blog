@@ -48,7 +48,7 @@
         <div class="col-md-6">
             <div class="card card-primary">
                 <div class="card-header with-border">
-                    <h3 class="card-title">{{ __('Roles y permisos') }}</h3>
+                    <h3 class="card-title">{{ __('Roles') }}</h3>
                 </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('admin.users.roles.update', $user) }}">
@@ -56,13 +56,33 @@
                         {{ method_field('PUT') }}
                         @foreach($roles as $id => $name)
                             <div class="checkbox">
-                                <label for="">
-                                    <input name="roles[]" type="checkbox" value="{{ $id }}" {{ $user->roles->contains($id) ? 'checked' : ''}}>
+                                <label for="roles-{{$id}}">
+                                    <input name="roles[]" id="roles-{{$id}}" type="checkbox" value="{{ $id }}" {{ $user->roles->contains($id) ? 'checked' : ''}}>
                                     {{ $name }}
                                 </label>
                             </div>
                         @endforeach
                         <button class="btn btn-primary btn-block">{{__('Actualizar roles')}}</button>
+                    </form>
+                </div>
+            </div>
+            <div class="card card-primary">
+                <div class="card-header with-border">
+                    <h3 class="card-title">{{ __('Permisos') }}</h3>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{{ route('admin.users.permissions.update', $user) }}">
+                        {{ csrf_field() }}
+                        {{ method_field('PUT') }}
+                        @foreach($permissions as $id => $name)
+                            <div class="checkbox">
+                                <label for="permissions-{{$id}}">
+                                    <input name="permissions[]" id="permissions-{{$id}}" type="checkbox" value="{{ $id }}" {{ $user->permissions->contains($id) ? 'checked' : ''}}>
+                                    {{ $name }}
+                                </label>
+                            </div>
+                        @endforeach
+                        <button class="btn btn-primary btn-block">{{__('Actualizar permisos')}}</button>
                     </form>
                 </div>
             </div>

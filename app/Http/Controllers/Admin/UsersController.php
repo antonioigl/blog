@@ -6,6 +6,7 @@ use App\Http\Requests\UpdateUserRequest;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use function __;
 use function back;
@@ -65,8 +66,9 @@ class UsersController extends Controller
     public function edit(User $user)
     {
         $roles = Role::pluck('name', 'id');
+        $permissions = Permission::pluck('name', 'id');
 
-        return view('admin.users.edit', compact('user', 'roles'));
+        return view('admin.users.edit', compact('user', 'roles', 'permissions'));
     }
 
     /**

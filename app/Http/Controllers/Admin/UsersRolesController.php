@@ -21,7 +21,13 @@ class UsersRolesController extends Controller
     {
         //syncRoles es un método del paquete laravel-permission.
         // Este método, primero, quita todos los roles del usuario y luego agrega todos los que le pasemos al método. De esta manera evitamos roles duplicados
-        $user->syncRoles($request->roles);
+        //$user->syncRoles($request->roles);
+
+        $user->roles()->detach();
+
+        if ($request->filled('roles')){
+            $user->assignRole($request->roles);
+        }
 
         return back()->with(['flash' => __('Los roles han sido actualizados')]);
     }
