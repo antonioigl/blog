@@ -25,8 +25,8 @@
                     <div class="row">
                         @foreach($post->photos as $photo)
                             <form action="{{route('admin.photos.destroy', $photo)}}" method="POST">
-                                {{ method_field('DELETE') }}
                                 {{ csrf_field() }}
+                                {{ method_field('DELETE') }}
                                 <div class="col-md-2">
                                     <button class="btn btn-danger btn-xs" style="position: absolute">
                                         <i class="fa fa-times"></i>
