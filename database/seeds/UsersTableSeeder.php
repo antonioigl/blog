@@ -31,6 +31,8 @@ class UsersTableSeeder extends Seeder
         $updateUsersPermission = Permission::create(['name' => 'Update users']);
         $deleteUsersPermission = Permission::create(['name' => 'Delete users']);
 
+        $updateUsersPermission = Permission::create(['name' => 'Update roles']);
+
         $admin = new User;
         $admin->name = 'Jorge';
         $admin->email = 'jorge@email.com';
