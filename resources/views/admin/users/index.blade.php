@@ -22,7 +22,7 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i> {{ __('Crear usuarios') }}</button>
+            <a href="{{route('admin.users.create')}}" class="btn btn-primary"><i class="fa fa-plus"></i> {{ __('Crear usuarios') }}</a>
             <table id="users-table" class="table table-bordered table-striped">
                 <thead>
                 <tr>

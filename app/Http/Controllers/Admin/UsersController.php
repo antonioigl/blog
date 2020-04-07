@@ -10,6 +10,8 @@ use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use function __;
 use function back;
+use function redirect;
+use function str_random;
 use function view;
 
 class UsersController extends Controller
@@ -33,7 +35,11 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create');
+        $user = new User;
+        $roles = Role::with('permissions')->get();
+        $permissions = Permission::pluck('name', 'id');
+
+        return view('admin.users.create', compact('user', 'roles', 'permissions'));
     }
 
     /**
@@ -44,7 +50,33 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validar el formulario
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+        ]);
+
+        // Generar contraseña
+        $data['password'] = str_random(8);
+
+        // Creamos el usuario
+        $user = User::create($data);
+
+        // Asignamos los roles
+        if ($request->filled('roles')){
+            $user->assignRole($request->roles);
+        }
+
+        // Asignamos los permisos
+        if ($request->filled('roles')) {
+            $user->givePermissionTo($request->permissions);
+        }
+
+        // Enviamos el email
+
+
+        // Regresamos al usuario
+        return redirect()->route('admin.users.index')->with(['flash' => 'El usuario ha sido creado']);
     }
 
     /**
